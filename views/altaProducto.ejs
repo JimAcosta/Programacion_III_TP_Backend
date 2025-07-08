@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/uploads/estilos/styles.css">
+  <title><%= producto ? 'Editar Producto' : 'Alta de Producto' %></title>
+</head>
+<body>
+  <main class="main-bienvenida">
+    <section class="seccion-productos">
+      <h1><%= producto ? 'Editar Producto' : 'Nuevo Producto' %></h1>
+
+      <form action="<%= producto ? `/admin/producto/editar/${producto.id}` : '/admin/producto/nuevo' %>" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; align-items: center; gap: 15px; max-width: 400px; margin: auto; background-color: #767676; padding: 20px; border-radius: 10px;">
+        
+        <label>Nombre:</label>
+        <input type="text" name="nombre" value="<%= producto ? producto.nombre : '' %>" required>
+
+        <label>Precio:</label>
+        <input type="number" name="precio" step="0.01" value="<%= producto ? producto.precio : '' %>" required>
+
+        <label>Tipo:</label>
+        <select name="tipo" required>
+          <option value="vinilo" <%= producto && producto.tipo === 'vinilo' ? 'selected' : '' %>>Vinilo</option>
+          <option value="disco" <%= producto && producto.tipo === 'disco' ? 'selected' : '' %>>Disco</option>
+        </select>
+
+        <label>Imagen:</label>
+        <% if (producto && producto.imagen) { %>
+          <img src="<%= producto.imagen %>" alt="Imagen actual" width="100">
+        <% } %>
+        <input type="file" name="imagen" accept="image/*">
+
+        <button type="submit" style="background-color: green; color: white; border-radius: 5px; height: 40px;">
+          <%= producto ? 'Guardar cambios' : 'Crear producto' %>
+        </button>
+      </form>
+    </section>
+    <style>.tabla-productos {
+  width: 90%;
+  margin: 40px auto;
+  border-collapse: collapse;
+  background-color: #444;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabla-productos th, .tabla-productos td {
+  border: 1px solid #666;
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.tabla-productos th {
+  background-color: #222;
+  font-size: 1.1rem;
+}
+
+.tabla-productos td img {
+  width: 80px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.tabla-productos tr:nth-child(even) {
+  background-color: #555;
+}
+
+.estado-activo {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.boton-modificar,
+.boton-baja {
+  padding: 6px 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+.boton-modificar {
+  background-color: #007bff;
+}
+
+.boton-modificar:hover {
+  background-color: #0056b3;
+}
+
+.boton-baja {
+  background-color: red;
+}
+
+.boton-baja:hover {
+  background-color: darkred;
+}
+
+.titulo-admin {
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  margin-top: 30px;
+}</style>
+  </main>
+</body>
+</html>
