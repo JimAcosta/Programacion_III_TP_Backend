@@ -1,0 +1,25 @@
+<%- include("partials/head.ejs") %>
+<div id="pageContainer" class="ventas">
+  <h2>Dashboard ventas</h2>
+  <div class="ventasTitleContainer">
+    <p class="ventasTitleItem">ID</p>
+    <p class="ventasTitleItem">Cliente</p>
+    <p class="ventasTitleItem fechaVenta">Fecha</p>
+    <p class="ventasTitleItem">Total</p>
+    <p class="ventasTitleItem">Acciones</p>
+  </div>
+  <% ventas.forEach(venta => { %>
+  <li class="ventaCardContainer">
+    <h5 class="ventaCardInfo"><span class="ventaCardTitleMobile">ID: </span><%= venta.id %></h5>
+    <p class="ventaCardInfo"><span class="ventaCardTitleMobile">Cliente: </span><%= venta.buyerName %></p>
+    <p class="ventaCardInfo"><span class="ventaCardTitleMobile">Fecha: </span><%= venta.date %></p>
+    <p class="ventaCardInfo"><span class="ventaCardTitleMobile">Monto Total: </span>$<%= venta.total %></p>
+    <div class="ventaCardActions">
+      <a class="detalleBoton" href="/dashboard/sales/details/<%= venta.id %>"
+        ><button class="detalleBoton">Detalle</button></a
+      >
+    </div>
+  </li>
+  <% }) %>
+</div>
+<%- include("partials/footer.ejs") %>

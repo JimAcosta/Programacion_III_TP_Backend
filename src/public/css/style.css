@@ -297,7 +297,67 @@ div#pageContainer h2 {
   padding-inline: 16px;
 }
 
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 18px 0px;
+  gap: 32px;
+}
 
+.ventaItemContainer {
+  border-bottom: 1px solid #fff;
+  padding-block: 20px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ventaCardActions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding-inline: 16px;
+  width: 20%;
+}
+
+.BackBoton {
+  width: fit-content;
+}
+
+.totalVenta {
+  width: 100%;
+  text-align: end;
+  padding-top: 20px;
+  color: #989793;
+}
+
+.ventaCardTitleMobile {
+  display: none;
+}
+
+div.backgroundDetalleVentas {
+  background-color: #2b2b2b;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-radius: 16px;
+  margin-inline: auto;
+  width: calc(100% - 40px);
+}
+
+.detailContainer {
+  padding-inline: 20px;
+  padding-top: 40px;
+  min-height: 49dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.downloadTicketButton {
+  align-self: end;
+  margin-top: 16px;
+}
 
 @media (max-width: 1440px) {
   .productosContainer {

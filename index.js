@@ -20,6 +20,7 @@ app.use(express.json());
 app.use(registro);
 
 app.use("/api/products", productsRoutes);
+app.use("/api/sales", salesRoutes);
 app.use("/dashboard", dashboardRoutes);
 
 app.listen(port, () => {
