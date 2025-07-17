@@ -1,0 +1,433 @@
+/* Global */
+body {
+  width: 100%;
+}
+
+body > ul,
+body > #listado-nav,
+body > footer,
+body > .contenedorTitulo,
+body > #getIdContainer,
+body > #pageContainer,
+body > .detailContainer {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+ul {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+}
+
+.favicon {
+  width: 70px;
+  opacity: 1;
+}
+
+img {
+  opacity: 1 !important;
+}
+
+h1 {
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0 !important;
+}
+
+h5 {
+  line-height: 1;
+}
+
+.contenedorTitulo button,
+.cardProductos button,
+.ventaCardContainer button {
+  margin: 0;
+}
+
+#getProductForm input {
+  margin: 0;
+}
+
+body > header {
+  padding-inline: 0 !important;
+  padding-bottom: 20px !important;
+  padding-top: 16px !important;
+}
+
+/* Navbar */
+.logoContainer {
+  display: flex;
+  align-items: end;
+  text-decoration: none;
+  gap: 8px;
+}
+
+.links-header{
+  color: #adadad;
+}
+#listadoNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 20px;
+  margin: 0;
+}
+
+#listadoNav li {
+  list-style-type: none;
+}
+
+.linksContainer {
+  display: flex;
+  gap: 50px;
+  padding-top: 10px;
+}
+
+.linksContainer a {
+  text-decoration: none;
+}
+
+.linksContainer a:hover {
+  text-decoration: underline;
+}
+
+/* Title */
+.contenedorTitulo {
+  display: flex;
+  padding: 40px 20px 20px 20px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.botonesContenedorTitulo {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+#getIdContainer,
+#pageContainer {
+  padding: 20px;
+}
+
+#editProductForm,
+#newProductForm {
+  width: 690px;
+  margin: auto;
+}
+
+#editProductForm input,
+#newProductForm input {
+  width: 100%;
+}
+
+#pageContainer h2 {
+  padding-block: 16px;
+  width: 690px;
+  margin: auto !important;
+}
+
+div#pageContainer h2 {
+  margin: 0 !important;
+}
+
+#getIdList {
+  padding-top: 40px;
+  width: 690px;
+  margin: auto;
+  min-height: 49dvh;
+}
+
+/* Card producto */
+.productosContainer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px;
+  padding: 30px;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.cardProductos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  list-style-type: none;
+  background-color: #2b2b2b;
+  padding: 10px;
+  
+}
+
+.cardProductosImgContenedor {
+  height: 200px;
+  width: 15vw;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.cardGetProductosImgContainer {
+  height: 100px;
+  width: 100px;
+  overflow: hidden;
+}
+
+.cardProductosImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 8px 8px;
+}
+
+.cardProductosInfo {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.cardProductosButtons {
+  padding-right: 16px;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  gap: 8px;
+}
+
+.btnBorrar, .btnActivar, .btnEditar, .btnNuevo, input.btnConsultar, .btnCrear{
+  background-color: #adadad !important;
+  border-color: black !important;
+}
+.active {
+  color: greenyellow;
+}
+
+.inactive {
+  color: red;
+}
+
+/* Form */
+#getProductForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+#getIdList .infoText {
+  text-align: center;
+}
+#pageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;         
+}
+#pageContainer h2{
+  text-align: center;
+}
+
+
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+.modalContent {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+/* Ventas */
+.ventas {
+  min-height: 65vh;
+}
+.ventasTitleContainer,
+.ventaCardContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ventasTitleContainer {
+  border-bottom: 1px solid #fff;
+  padding-block: 16px;
+}
+
+.ventaCardContainer {
+  border-bottom: 1px solid #585858;
+  padding-block: 8px;
+}
+
+.ventasTitleContainer .ventasTitleItem,
+.ventaCardContainer .ventaCardInfo {
+  width: 20%;
+  padding-inline: 16px;
+}
+
+
+
+@media (max-width: 1440px) {
+  .productosContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .productosContainer {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .cardProductos {
+    width: 100%;
+  }
+
+  .cardProductosImgContenedor {
+    height: 200px;
+    width: 200px;
+  }
+  .cardGetProductosImgContainer {
+    height: 200px;
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .detalleBoton {
+    width: 100%;
+  }
+
+  .ventaCardTitleMobile {
+    display: flex;
+  }
+
+  .ventasTitleContainer {
+    display: none;
+  }
+
+  .ventaCardContainer {
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+    padding-block: 20px;
+  }
+
+  .ventaCardInfo {
+    display: flex;
+    gap: 10px;
+  }
+
+  .ventaCardContainer .ventaCardInfo,
+  .ventaCardActions {
+    width: 100%;
+  }
+
+  .ventaItemContainer {
+    flex-direction: column;
+  }
+
+  #listadoNav {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #getIdList {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  #editProductForm,
+  #pageContainer h2,
+  #newProductForm {
+    width: 100%;
+  }
+
+  #getProductForm {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .cardProductos {
+    flex-direction: column;
+  }
+
+  .cardProductosImgContenedor {
+    height: 160px;
+    width: 100%;
+  }
+
+  .cardGetProductosImgContainer {
+    height: 160px;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .cardProductosImg {
+    height: 100%;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .cardProductosInfo {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .cardProductosButtons {
+    padding-right: 0px;
+  }
+
+  .contenedorTitulo {
+    gap: 16px;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  div.backgroundDetalleVentas {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 28px !important;
+  }
+  .linksContainer {
+    gap: 36px;
+  }
+}

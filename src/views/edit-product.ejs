@@ -1,0 +1,84 @@
+<%- include("partials/head.ejs") %>
+<div id="pageContainer" class="crudFormContainer">
+  <h2>Editar producto</h2>
+  <form id="editProductForm">
+    <label for="nombreProd">Nombre producto</label>
+    <input
+      type="text"
+      nombre="nombreProd"
+      id="nombreProd"
+      placeholder="Ingrese el nombre del producto"
+      required
+      value="<%= producto.nombre %>"
+    />
+    <label for="categoria">Categoria</label>
+    <input
+      type="text"
+      nombre="categoria"
+      id="categoria"
+      placeholder="Ingrese la categoria del producto"
+      required
+      value="<%= producto.categoria %>"
+    />
+    <label for="precio">Precio</label>
+    <input
+      type="number"
+      nombre="precio"
+      id="precio"
+      placeholder="Ingrese el precio del producto"
+      required
+      value="<%= producto.precio %>"
+    />
+    <label for="imagen">Imagen</label>
+    <input
+      type="text"
+      nombre="imagen"
+      id="imagen"
+      placeholder="Ingrese Url de la imagen del producto"
+      required
+      value="<%= producto.imagen %>"
+    />
+    <input type="submit" value="Editar" />
+  </form>
+</div>
+<script>
+  const id = <%= JSON.stringify(producto.id) %>;
+  
+  let editProductForm = document.getElementById("editProductForm");
+  let getIdLista = document.getElementById("getIdList");
+
+  editProductForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    let nombreProd = document.getElementById("nombreProd").value;
+    let categoria = document.getElementById("categoria").value;
+    let precio = document.getElementById("precio").value;
+    let imagen = document.getElementById("imagen").value;
+    let datos = await enviarDatosProducto(nombreProd, categoria, precio, imagen);
+  });
+
+  async function enviarDatosProducto(nombre, categoria, precio, imagen) {
+    try {
+      let respuesta = await fetch(`http://localhost:3000/api/products${id ? `/${id}` : ""}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre: nombre,
+          categoria: categoria,
+          precio: precio,
+          imagen: imagen,
+        }),
+      });
+      if (!respuesta.ok) {
+        throw new Error("Error al editar producto");
+      }
+      let datos = await respuesta.json();
+      window.location.href = "/dashboard";
+      return datos;
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
+</script>
+<%- include("partials/footer.ejs") %>

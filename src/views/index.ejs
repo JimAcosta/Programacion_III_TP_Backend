@@ -1,0 +1,51 @@
+<%- include("partials/head.ejs") %>
+<div class="contenedorTitulo">
+  <h2 class="titulo">Dashboard Productos</h2>
+  <div class="botonesContenedorTitulo">
+    <a href="/dashboard/new-product">
+      <button class="btnNuevo">Nuevo Producto</button>
+    </a>
+  </div>
+</div>
+<ul class="productosContainer">  
+  <% productos.forEach(prod => {  %>  
+    <li class="cardProductos">
+      <div class="cardProductosImgContenedor">
+        <img src="<%= prod.imagen %>" alt="<%= prod.nombre %>" class="cardProductosImg">        
+      </div>
+      <div class="cardProductosInfo">
+        <p>
+          Id: <%= prod.id %>
+        </p>
+        <h4>
+          <%= prod.nombre %>
+        </h4>
+        <h6>
+          $<%= prod.precio %>
+        </h6>
+        <p>Estado: <span class="<%= prod.esta_activo ? "active" : "inactive" %>"><%= prod.esta_activo ? "Activo" : "Inactivo" %></span>
+        </p>
+        <div class="cardProductosButtons">
+          <a href="/dashboard/edit-product/<%= prod.id %>">
+          <button class="btnEditar">Editar</button>
+        </a>
+        <% if (prod.esta_activo){ %>
+            <button class="btnBorrar" data-id="<%= prod.id %>">Eliminar</button>
+          <% } %>
+          <% if (!prod.esta_activo){ %>
+            <button class="btnActivar" data-id="<%= prod.id %>">Activar</button>
+          <% } %>
+        </div>
+      </div>
+    </li>
+  <% }) %>  
+</ul>
+  <script type="module">
+  import { handleProductStatus } from "/js/productStatusHandler.js";
+
+    document.addEventListener('DOMContentLoaded', () => {
+      handleProductStatus();
+    });
+
+  </script>
+<%- include("partials/footer.ejs") %>

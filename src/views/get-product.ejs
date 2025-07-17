@@ -1,0 +1,94 @@
+<%- include("partials/head.ejs") %>
+<div class="contenedorTitulo">
+  <h2 class="titulo">Consultar Producto</h2>
+  <form id="getProductForm">
+    <label for="idProd" style="display: none;">Id producto</label>
+    <input 
+      type="number"
+      nombre="idProd"
+      id="idProd"
+      placeholder="Ingrese el id del producto"
+      required
+    />
+    <input class="btnConsultar" type="submit" value="Consultar" />
+  </form>
+</div>
+<div id="getIdContainer">
+  <ul id="getIdList">
+    <p class="infoText">Ingrese el id del producto para consultar</p>
+    <!-- Aquí se mostrarán los productos consultados -->
+  </ul>
+</div>
+<script type="module">
+  import { handleProductStatus } from "/js/productStatusHandler.js";
+
+  let getProduct_form = document.getElementById("getProductForm");
+  let getIdLista = document.getElementById("getIdList");
+
+  getProduct_form.addEventListener("submit", async (e) => {
+    getIdLista.innerHTML = "<p>Cargando producto...</p>";
+    e.preventDefault();
+    let idProd = document.getElementById("idProd").value;
+    let datos = await obtenerDatosProductosPorId(idProd);
+    if (datos) mostrarProductos(datos);
+  });
+
+  async function obtenerDatosProductosPorId(id) {
+    try {
+      let respuesta = await fetch(
+        `http://localhost:3000/api/products${id ? `/${id}` : ""}`
+      );
+      if (!respuesta.ok) {
+        let message = "Error al obtener el producto";
+        if (respuesta.status === 404) message = "No hay productos disponibles.";
+        getIdLista.innerHTML = message;
+        return;
+      }
+      let datos = await respuesta.json();
+      return datos;
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
+
+  function mostrarProductos(producto) {
+    let htmlProductos = "";
+
+    htmlProductos += `
+    <li class="cardProductos">
+      <div class="cardGetProductosImgContainer">
+        <img src=${producto.imagen} alt=${producto.nombre} class="cardProductosImg">
+      </div>
+      <div class="cardProductosInfo">
+        <p>
+          Id: ${producto.id}
+        </p>
+        <h4>
+          ${producto.nombre}
+        </h4>
+        <h6>
+          $${producto.precio}
+        </h6>
+        <p>Estado: <span class="${
+          producto.esta_activo ? "active" : "inactive"
+        }">${producto.esta_activo ? "Activo" : "Inactivo"}</span>
+        </p>
+        <div class="cardProductosButtons">
+          <a href="/dashboard/edit-product/${producto.id}">
+          <button class="btnEditar">Editar</button>
+        </a>
+          ${
+            producto.esta_activo
+              ? `<button class="btnBorrar" data-id="${producto.id}">Eliminar</button>`
+              : `<button class="btnActivar" data-id="${producto.id}">Activar</button>`
+          }
+        </div>
+      </div>
+    </li>
+            `;
+    getIdLista.innerHTML = htmlProductos;
+
+    handleProductStatus();
+  }
+</script>
+<%- include("partials/footer.ejs") %>
