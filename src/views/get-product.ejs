@@ -36,7 +36,7 @@
   async function obtenerDatosProductosPorId(id) {
     try {
       let respuesta = await fetch(
-        `http://localhost:3000/api/products${id ? `/${id}` : ""}`
+        `https://programacion-iii-tp-backend.onrender.com//api/products${id ? `/${id}` : ""}`
       );
       if (!respuesta.ok) {
         let message = "Error al obtener el producto";
