@@ -58,7 +58,7 @@
 
   async function enviarDatosProducto(nombre, categoria, precio, imagen) {
     try {
-      let respuesta = await fetch(`http://localhost:3000/api/products${id ? `/${id}` : ""}`, {
+      let respuesta = await fetch(`https://programacion-iii-tp-backend.onrender.com/api/products${id ? `/${id}` : ""}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

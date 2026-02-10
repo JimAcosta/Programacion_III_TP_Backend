@@ -53,7 +53,7 @@
   async function enviarDatosProducto(nombre, categoria, precio, imagen) {
     console.log("lega");
     try {
-      let respuesta = await fetch(`http://localhost:3000/api/products`, {
+      let respuesta = await fetch(`https://programacion-iii-tp-backend.onrender.com/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
