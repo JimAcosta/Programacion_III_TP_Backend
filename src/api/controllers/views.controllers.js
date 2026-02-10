@@ -94,7 +94,7 @@ export const obtenerDetalleVenta = async (req, res) => {
 
     // Formateo de cada ítem
     detalleVenta.items.forEach((item) => {
-      item.subtotal = FormateadorNumero.format(item.quantity * item.productPrice);
+      item.subtotal = FormateadorNumero.format(item.cantidad * item.precioProducto);
       item.productPrice = FormateadorNumero.format(item.productPrice);
     });
 

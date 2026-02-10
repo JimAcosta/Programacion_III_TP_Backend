@@ -3,7 +3,7 @@
   <div>
     <h3>Id: <%= detalleVenta.id %></h3>
     <p>Fecha: <%= detalleVenta.fecha.toLocaleDateString("en-GB") %></p>
-    <p>Cliente: <%= detalleVenta.buyerName %></p>
+    <p>Cliente: <%= detalleVenta.nombreCliente %></p>
   </div>
   <div>
     <a href="/dashboard/sales" class="BackBoton"><button>Volver</button></a>
@@ -13,17 +13,18 @@
   <h4>Conceptos venta</h4>
   <% detalleVenta.items.forEach(item => { %>
     <div class="ventaItemContainer">
-      <span>- <%= item.productName %></span>
+      <span>- <%= item.nombreProducto %></span>
       <span><%= item.cantidad %> un.</span>
-      <span>$<%= item.productPrice %> x un.</span>
+      <span>$<%= item.precioProducto %> x un.</span>
       <span>Subtotal $<%= item.subtotal %></span>
     </div>
     <% }) %>
     <h4 class="totalVenta">Total: $<%= detalleVenta.total %></h4>
     <button class="downloadTicketButton">Descargar comprobante</button>
 </div>
+
 <script>
-    const venta = "<%- JSON.stringify(detalleVenta) %>";
+    const venta = JSON.parse('<%- JSON.stringify(detalleVenta) %>');
 
     async function exportarPedidoPDF(pedido) {
     const { jsPDF } = window.jspdf;
@@ -44,7 +45,7 @@
       y += 10;
       doc.setFontSize(11);
       doc.text(
-        `${item.cantidad} x ${item.productName} - $${(Number(item.productPrice)).toFixed(2)}`,
+        `${item.cantidad} x ${item.nombreProducto} - $${(Number(item.precioProducto)).toFixed(2)}`,
         margenIzq,
         y - 2
       );
@@ -59,7 +60,7 @@
 
     doc.setFontSize(10);
     doc.setTextColor(255, 0, 0);
-    doc.text("Alumnos: Jimmy Acosta, Santiago Amato", margenIzq, 280);
+    doc.text("Alumno: Jimmy Acosta", margenIzq, 280);
 
     doc.save(`TECH SHOP-pedido-${pedido.id}.pdf`);
   }

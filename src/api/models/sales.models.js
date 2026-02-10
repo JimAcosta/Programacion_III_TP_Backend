@@ -33,7 +33,6 @@ export default class Ventas {
 
   // Crear venta con items usando transacción
   static crearVenta = async (venta) => {
-    console.log("llegaaca");
     if (!venta.total || !venta.items?.length || !venta.nombreCliente) {
       return null;
     }
