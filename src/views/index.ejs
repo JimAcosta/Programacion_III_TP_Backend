@@ -30,7 +30,7 @@
           <button class="btnEditar">Editar</button>
         </a>
         <% if (prod.esta_activo){ %>
-            <button class="btnBorrar" data-id="<%= prod.id %>">Eliminar</button>
+            <button class="btnBorrar" data-id="<%= prod.id %>">Desactivar</button>
           <% } %>
           <% if (!prod.esta_activo){ %>
             <button class="btnActivar" data-id="<%= prod.id %>">Activar</button>
