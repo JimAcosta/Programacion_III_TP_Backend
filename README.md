@@ -1,12 +1,10 @@
-Nombre del Proyecto
-
-Vibras Store – Admin API
+# Vibras Store – Admin API
 
 Descripción
 
 API REST desarrollada con Node.js y Express que permite administrar productos (Discos y Vinilos) y gestionar ventas dentro de una tienda online.
 
-El sistema funciona como un dashboard administrativo que permite:
+## El sistema funciona como un dashboard administrativo que permite:
 
 - Crear productos (Discos o Vinilos)
 - Activar o desactivar productos (baja lógica)
@@ -17,14 +15,14 @@ El sistema funciona como un dashboard administrativo que permite:
 
 El objetivo del proyecto es simular un sistema real de gestión comercial con separación clara entre backend administrativo y frontend cliente.
 
-Tecnologías Utilizadas
+## Tecnologías Utilizadas
 
-Node.js
-Express.js
-JavaScript
-jsPDF
-CORS
-Dotenv
+- Node.js
+- Express.js
+- JavaScript
+- jsPDF
+- CORS
+- Dotenv
 
 
 Arquitectura
