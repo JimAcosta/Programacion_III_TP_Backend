@@ -25,7 +25,7 @@ El objetivo del proyecto es simular un sistema real de gestión comercial con se
 - Dotenv
 
 
-Arquitectura
+## Arquitectura
 
 El proyecto está organizado siguiendo una estructura modular separando responsabilidades
 
@@ -36,7 +36,7 @@ El proyecto está organizado siguiendo una estructura modular separando responsa
 - Utils → Generación de PDF y helpers
 
 
-Funcionalidades Principales
+##Funcionalidades Principales
 
 Gestión de Productos
 
@@ -47,19 +47,19 @@ PUT /api/products/${selectedProductId} → Activar / Desactivar producto
 GET /dashboard/get-product → Busca producto por ID
 GET /dashboard/sales → Lista las ventas
 
-Los productos pueden ser:
+### Los productos pueden ser:
 
-Disco
-Vinilo
+- Disco
+- Vinilo
 
-Cada producto posee:
+### Cada producto posee:
 
-id
-nombre
-tipo
-precio
-estado (activo/inactivo)
-imagen 
+- id
+- nombre
+- tipo
+- precio
+- estado (activo/inactivo)
+- imagen 
 
 
 El reporte PDF incluye:
@@ -76,3 +76,7 @@ Lógica de Negocio Destacada
 - Baja lógica de productos (no se eliminan físicamente).
 - Generación dinámica de PDF.
 - Separación clara entre lógica administrativa y consumo cliente.
+
+### Demo en Producción
+
+https://programacion-iii-tp-backend.onrender.com/dashboard
