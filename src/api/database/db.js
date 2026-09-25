@@ -1,24 +1,24 @@
-import mysql from "mysql2/promise";
-import env from "../config/env.js";
+import pg from "pg";
 
-const { database } = env;
+const { Pool } = pg;
 
-const conexion = mysql.createPool({
-  host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
-  password: process.env.MYSQLPASSWORD,
-  database: process.env.MYSQLDATABASE,
-  port: Number(process.env.MYSQLPORT),
+const conexion = new Pool({
+  host: process.env.PGHOST,
+  user: process.env.PGUSER,
+  password: process.env.PGPASSWORD,
+  database: process.env.PGDATABASE,
+  port: Number(process.env.PGPORT),
 
   ssl: {
     rejectUnauthorized: false,
   },
+});
 
-  decimalNumbers: true,
-});
 console.log({
-  host: process.env.MYSQLHOST,
-  user: process.env.MYSQLUSER,
-  db: process.env.MYSQLDATABASE,
+  host: process.env.PGHOST,
+  user: process.env.PGUSER,
+  database: process.env.PGDATABASE,
+  port: process.env.PGPORT,
 });
+
 export default conexion;

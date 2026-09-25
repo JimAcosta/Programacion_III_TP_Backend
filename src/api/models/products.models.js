@@ -3,10 +3,16 @@ import conexion from "../database/db.js";
 
 export default class Productos {
   static devolverTodos = async () => {
-    let sql = `SELECT * FROM productos`;
-    const [rows] = await conexion.query(sql);
-    return rows;
-  };
+  console.log("LLEGOO");
+
+  const sql = `SELECT * FROM productos`;
+
+  const { rows } = await conexion.query(sql);
+
+  console.log("lineas", rows);
+
+  return rows;
+};
 
   static buscarPorId = async (id) => {
     let sql = `SELECT * FROM productos WHERE id = ?`;

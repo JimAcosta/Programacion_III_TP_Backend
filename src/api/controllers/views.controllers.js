@@ -18,7 +18,7 @@ export const obtenerTodosLosProductos = async (req, res) => {
   } catch (error) {
     console.error("Error obteniendo la información", error.message);
     res.status(500).json({
-      error: "Error interno al obtener la información",
+      error: "Error interno al obteneeeer la información",
     });
   }
 };
@@ -72,7 +72,7 @@ export const obtenerTodasLasVentas = async (req, res) => {
   } catch (error) {
     console.error("Error obteniendo la información", error.message);
     res.status(500).json({
-      error: "Error interno al obtener la indsfdfformación",
+      error: "Error interno al obtener la información",
     });
   }
 };
