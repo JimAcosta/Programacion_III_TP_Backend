@@ -9,15 +9,29 @@ export class FormateadorNumero {
     let numNormalizado;
 
     if (typeof num === "string") {
-      const esNegativo = num.trim().startsWith("-");
-      const parteNumerica = num
-        .replace(/[^0-9,]/g, "")
-        .replace(/\./g, "")
-        .replace(",", ".");
-      numNormalizado = Number(parteNumerica);
-      if (esNegativo) numNormalizado *= -1;
+      const valor = num.trim();
+      const esNegativo = valor.startsWith("-");
+
+      let valorLimpio = valor.replace("-", "");
+
+      // Si tiene coma, asumimos formato argentino:
+      // 15.500,00 → 15500
+      if (valorLimpio.includes(",")) {
+        valorLimpio = valorLimpio
+          .replace(/\./g, "")
+          .replace(",", ".");
+      }
+
+      // Si tiene solamente punto, lo tratamos como
+      // separador decimal (formato que devuelve PostgreSQL):
+      // 155000.00 → 155000
+      numNormalizado = Number(valorLimpio);
+
+      if (esNegativo) {
+        numNormalizado *= -1;
+      }
     } else {
-      numNormalizado = num;
+      numNormalizado = Number(num);
     }
 
     if (isNaN(numNormalizado)) {
@@ -28,9 +42,14 @@ export class FormateadorNumero {
     const [intOriginal, parteDecimal] = fixed.split(".");
 
     const esNegativo = intOriginal.startsWith("-");
-    const intPart = esNegativo ? intOriginal.slice(1) : intOriginal;
+    const intPart = esNegativo
+      ? intOriginal.slice(1)
+      : intOriginal;
 
     const intFormateado = intPart.replace(this.REGEX, ".");
-    return `${esNegativo ? "-" : ""}${intFormateado}${(parteDecimal === "00" ? "" : "," + parteDecimal)}`;
+
+    return `${esNegativo ? "-" : ""}${intFormateado}${
+      parteDecimal === "00" ? "" : "," + parteDecimal
+    }`;
   };
 }

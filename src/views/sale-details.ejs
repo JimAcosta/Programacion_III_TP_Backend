@@ -53,6 +53,9 @@
 
     y += 10;
 
+    const totalCalculado = pedido.items.reduce((total, item) => {
+      return total + Number(item.cantidad) * Number(item.precioProducto);
+    }, 0);
     doc.setFontSize(12);
     doc.text("TOTAL", margenIzq, y);
     doc.line(margenIzq + 20, y + 2, margenDer, y + 2);
