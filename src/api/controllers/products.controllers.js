@@ -21,6 +21,7 @@ export const obtenerProductoPorId = async (req, res) => {
     const productoEncontrado = await Productos.buscarPorId(id);
 
     if (!productoEncontrado)
+      
       return res
         .status(404)
         .json({ error: `No se encontró el producto con ID: ${id}` });

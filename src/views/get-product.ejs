@@ -36,9 +36,11 @@
   async function obtenerDatosProductosPorId(id) {
     try {
       let respuesta = await fetch(
-        `https://programacion-iii-tp-backend.onrender.com/api/products${id ? `/${id}` : ""}`
+        `http://localhost:3000/api/products${id ? `/${id}` : ""}`
       );
+      console.log("STATUS:", respuesta.status);
       if (!respuesta.ok) {
+        console.log("n encon")
         let message = "Error al obtener el producto";
         if (respuesta.status === 404) message = "No hay productos disponibles.";
         getIdLista.innerHTML = message;

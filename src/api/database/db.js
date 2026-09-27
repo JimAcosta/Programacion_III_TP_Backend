@@ -14,11 +14,6 @@ const conexion = new Pool({
   },
 });
 
-console.log({
-  host: process.env.PGHOST,
-  user: process.env.PGUSER,
-  database: process.env.PGDATABASE,
-  port: process.env.PGPORT,
-});
+
 
 export default conexion;

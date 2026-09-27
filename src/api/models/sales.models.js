@@ -1,81 +1,116 @@
 import conexion from "../database/db.js";
 
 export default class Ventas {
-  // Devuelve todas las ventas (sin items)
+
+  // Devuelve todas las ventas
   static devolverTodos = async () => {
     const sql = `SELECT * FROM ventas`;
-    const [resultado] = await conexion.query(sql);
-    return resultado;
+
+    const { rows } = await conexion.query(sql);
+
+    return rows;
   };
+
 
   // Buscar venta por id con sus items
   static buscarVentaPorId = async (id) => {
+
     // Obtener venta
-    const [ventas] = await conexion.query(
-      `SELECT id, fecha, total, nombreCliente FROM ventas WHERE id = ?`,
+    const { rows: ventas } = await conexion.query(
+      `SELECT id, fecha, total, "nombreCliente"
+       FROM ventas
+       WHERE id = $1`,
       [id]
     );
 
-    if (ventas.length === 0) return null;
+    if (ventas.length === 0) {
+      return null;
+    }
 
     // Obtener items de la venta
-    const [items] = await conexion.query(
-      `SELECT idProducto, nombreProducto, cantidad, precioProducto FROM items_venta WHERE idVenta = ?`,
+    const { rows: items } = await conexion.query(
+      `SELECT "idProducto",
+              "nombreProducto",
+              cantidad,
+              "precioProducto"
+       FROM items_venta
+       WHERE "idVenta" = $1`,
       [id]
     );
 
     // Armar objeto completo
     const ventaCompleta = ventas[0];
+
     ventaCompleta.items = items;
 
     return ventaCompleta;
   };
 
+
   // Crear venta con items usando transacción
   static crearVenta = async (venta) => {
-    if (!venta.total || !venta.items?.length || !venta.nombreCliente) {
+
+    if (
+      !venta.total ||
+      !venta.items?.length ||
+      !venta.nombreCliente
+    ) {
       return null;
     }
 
-    const conn = await conexion.getConnection();
+    const client = await conexion.connect();
 
     try {
-      await conn.beginTransaction();
+
+      await client.query("BEGIN");
 
       // Insertar venta
-      const [resultadoVenta] = await conn.query(
-        `INSERT INTO ventas (total, nombreCliente) VALUES (?, ?)`,
-        [venta.total, venta.nombreCliente]
+      const resultadoVenta = await client.query(
+        `INSERT INTO ventas ("total", "nombreCliente")
+         VALUES ($1, $2)
+         RETURNING id`,
+        [
+          venta.total,
+          venta.nombreCliente
+        ]
       );
-      const idVenta = resultadoVenta.insertId;
 
-      // Preparar items para insertarlos
-      const itemsData = venta.items.map(item => [
-        idVenta,
-        item.idProducto,
-        item.cantidad,
-        item.precioProducto,
-        item.nombreProducto
-      ]);
+      const idVenta = resultadoVenta.rows[0].id;
 
       // Insertar items
-      const sqlItems = `
-        INSERT INTO items_venta 
-        (idVenta, idProducto, cantidad, precioProducto, nombreProducto) 
-        VALUES ?`;
+      for (const item of venta.items) {
 
-      await conn.query(sqlItems, [itemsData]);
+        await client.query(
+          `INSERT INTO items_venta
+           ("idVenta", "idProducto", cantidad, "precioProducto", "nombreProducto")
+           VALUES ($1, $2, $3, $4, $5)`,
+          [
+            idVenta,
+            item.idProducto,
+            item.cantidad,
+            item.precioProducto,
+            item.nombreProducto
+          ]
+        );
 
-      await conn.commit();
-      conn.release();
+      }
+
+      await client.query("COMMIT");
 
       return idVenta;
 
     } catch (error) {
-      await conn.rollback();
-      conn.release();
+
+      await client.query("ROLLBACK");
+
       console.error("Error al crear la venta:", error);
+
       return null;
+
+    } finally {
+
+      client.release();
+
     }
   };
 }
