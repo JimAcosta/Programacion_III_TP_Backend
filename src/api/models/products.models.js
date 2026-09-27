@@ -74,10 +74,11 @@ export default class Productos {
 
   static borrarUno = async (id) => {
 
-  const sql = `UPDATE productosSET esta_activo = FALSEWHERE id = $1`;
+  const sql = `UPDATE productos SET esta_activo = FALSE WHERE id = $1`;
   const resultado = await conexion.query(sql, [id]);
 
   return resultado.rowCount > 0;
 };
+
 
 }
